@@ -1,78 +1,9 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include "Person.hpp"
 
 enum class Command {ADD, SEARCH, EXIT, NON};
-
-class Person {
-char name[10];
-char lastname[20];
-char login[20];
-char adress[40];
-
-public:
-
-Person(const char* name, char* lastname, char* login, char* adress) {
-
-    strncpy(this->name, name, sizeof(name) - 1);
-    this->name[sizeof(name) - 1] = '\0';
-
-    strncpy(this->lastname, lastname, sizeof(lastname) - 1);
-    this->lastname[sizeof(lastname) - 1] = '\0';
-
-
-    strncpy(this->login, login, sizeof(login) - 1);
-    this->login[sizeof(login) - 1] = '\0';
-
-    strncpy(this->adress, adress, sizeof(adress) - 1);
-    this->adress[sizeof(adress) - 1] = '\0';
-
-    }
-
-    Person() {}
-
-    static void createPers(Person& pers) {
-        char name[10];
-        char login[20];
-        char adress[40];
-        char lastname[20];
-
-        std::cout << "Enter name: ";
-        std::cin >> std::setw(10) >> name;
-        std::cout << "Enter login: ";
-        std::cin >> std::setw(20) >> login;
-        std::cout << "Enter adress: ";
-        std::cin >> std::setw(40) >> adress;
-        std::cout << "Enter lastname: ";
-        std::cin >> std::setw(20) >> lastname;
-
-
-  
-        strncpy(pers.name, name, sizeof(pers.name) - 1);
-        pers.name[sizeof(name) - 1] = '\0';
-
-        strncpy(pers.lastname, lastname, sizeof(pers.lastname) - 1);
-        pers.lastname[sizeof(lastname) - 1] = '\0';
-
-
-        strncpy(pers.login, login, sizeof(pers.login) - 1);
-        pers.login[sizeof(login) - 1] = '\0';
-
-        strncpy(pers.adress, adress, sizeof(pers.adress) - 1);
-        pers.adress[sizeof(adress) - 1] = '\0';
-
-    }
-
-    friend std::ostream& operator<<(std::ostream& os, const Person& pers);
-};
-
-
-    std::ostream& operator<<(std::ostream& os, const Person& pers) {
-        os << pers.name << " | " << pers.lastname 
-        << " | " << pers.login << " | " << pers.adress << std::endl;
-        return os;
-    }
-
 
 void menu() {
     int top = -1;
@@ -108,6 +39,7 @@ void menu() {
                 break;
             case Command::SEARCH:
                 std::cout << "Index | Name | Lastname | Login | Address\n";
+                std::cout << "-----------------------------------------\n";
                 for (int i = 0; i <= top; i++) {
                     std::cout << i << " | " << *(contacts[i]);
                 }
