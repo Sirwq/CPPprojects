@@ -3,7 +3,7 @@
 template <typename T>
 class Stack {
 size_t size;
-int top = -1;
+size_t top = -1;
 T* data;
 
 public:
@@ -25,11 +25,11 @@ public:
     }
 
     ~Stack() {
-        delete data;
+        delete[] data; // delete data; WILL NOT DELETE EVERYTHING!!!
     }
 
     void push(T value) {
-        if (Stack.size > Stack.top) {
+        if (size > top) {
             ++top;
             data[top] = value;
         } else {}
@@ -40,19 +40,23 @@ public:
     }
     
     bool isFull() {
-        return top == size;
+        return top == static_cast<int>(size) - 1;
     }
     
     void peek() {
-        if (!isEmpty)
+        if (!isEmpty())
             std::cout << data[top];
     }
 
     void pop() {
-        if (top > 0) {
-            delete data[top];
+        if (!isEmpty()) {
+            data[top] = nullptr;
             --top;
         }
+    }
+
+    T& topElement() {
+        return data[top];
     }
 
 };
