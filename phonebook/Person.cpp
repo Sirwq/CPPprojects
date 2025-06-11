@@ -4,19 +4,15 @@ Person::Person() {}
 
 Person::Person(const char* name, char* lastname, char* login, char* adress) {
 
-    strncpy(this->name, name, sizeof(name) - 1);
-    this->name[sizeof(name) - 1] = '\0';
+    copyField(this->name, name, sizeof(this->name));
+    copyField(this->lastname, lastname, sizeof(this->lastname));
+    copyField(this->login, login, sizeof(this->login));
+    copyField(this->adress, adress, sizeof(this->adress));
+}
 
-    strncpy(this->lastname, lastname, sizeof(lastname) - 1);
-    this->lastname[sizeof(lastname) - 1] = '\0';
-
-
-    strncpy(this->login, login, sizeof(login) - 1);
-    this->login[sizeof(login) - 1] = '\0';
-
-    strncpy(this->adress, adress, sizeof(adress) - 1);
-    this->adress[sizeof(adress) - 1] = '\0';
-
+void Person::copyField(char* dest, const char* src, size_t size) {
+    std::strncpy(dest, src, size - 1);
+    dest[size - 1] = '\0';
 }
 
 void Person::inputField(const char* prompt, char* dest, size_t size) {
